@@ -1,3 +1,5 @@
+import 'package:aquarius/screens/auth/signup_screen.dart';
+import 'package:aquarius/screens/home_screen.dart';
 import 'package:aquarius/utils/colors.dart';
 import 'package:aquarius/widget/button_widget.dart';
 import 'package:aquarius/widget/textField_widget.dart';
@@ -41,7 +43,12 @@ class LoginScreen extends StatelessWidget {
                 height: 20,
               ),
               ButtonWidget(
-                  label: 'Log In', onPressed: (() {}), buttonColor: primary),
+                  label: 'Log In',
+                  onPressed: (() {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const HomeScreen()));
+                  }),
+                  buttonColor: primary),
               TextButton(
                   onPressed: (() {}),
                   child: TextRegular(
@@ -66,7 +73,10 @@ class LoginScreen extends StatelessWidget {
                     width: 10,
                   ),
                   TextButton(
-                      onPressed: (() {}),
+                      onPressed: (() {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => SignupScreen()));
+                      }),
                       child: TextBold(
                           text: "Sign Up", fontSize: 18, color: Colors.white)),
                 ],
