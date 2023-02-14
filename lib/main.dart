@@ -1,4 +1,4 @@
-import 'package:aquarius/screens/home_screen.dart';
+import 'package:aquarius/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
