@@ -1,5 +1,6 @@
 import 'package:aquarius/widget/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class DataTab extends StatefulWidget {
   @override
@@ -79,6 +80,21 @@ class _DataTabState extends State<DataTab> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(5),
                     ),
+                    child: SfCartesianChart(
+                        // Initialize category axis
+                        primaryXAxis: CategoryAxis(),
+                        series: <ChartSeries>[
+                          // Initialize line series
+                          LineSeries<ChartData, String>(
+                              dataSource: [
+                                // Bind data source
+                                ChartData('15:29', 1),
+                                ChartData('15:30', 7.5),
+                                ChartData('15:31', 2.8),
+                              ],
+                              xValueMapper: (ChartData data, _) => data.x,
+                              yValueMapper: (ChartData data, _) => data.y)
+                        ]),
                   ),
                 ),
               ),
@@ -95,6 +111,21 @@ class _DataTabState extends State<DataTab> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(5),
                     ),
+                    child: SfCartesianChart(
+                        // Initialize category axis
+                        primaryXAxis: CategoryAxis(),
+                        series: <ChartSeries>[
+                          // Initialize line series
+                          LineSeries<ChartData, String>(
+                              dataSource: [
+                                // Bind data source
+                                ChartData('15:29', 1),
+                                ChartData('15:30', 7.5),
+                                ChartData('15:31', 2.8),
+                              ],
+                              xValueMapper: (ChartData data, _) => data.x,
+                              yValueMapper: (ChartData data, _) => data.y)
+                        ]),
                   ),
                 ),
               ),
@@ -111,6 +142,21 @@ class _DataTabState extends State<DataTab> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(5),
                     ),
+                    child: SfCartesianChart(
+                        // Initialize category axis
+                        primaryXAxis: CategoryAxis(),
+                        series: <ChartSeries>[
+                          // Initialize line series
+                          LineSeries<ChartData, String>(
+                              dataSource: [
+                                // Bind data source
+                                ChartData('15:29', 1),
+                                ChartData('15:30', 7.5),
+                                ChartData('15:31', 2.8),
+                              ],
+                              xValueMapper: (ChartData data, _) => data.x,
+                              yValueMapper: (ChartData data, _) => data.y)
+                        ]),
                   ),
                 ),
               ),
@@ -120,4 +166,10 @@ class _DataTabState extends State<DataTab> {
       ),
     );
   }
+}
+
+class ChartData {
+  ChartData(this.x, this.y);
+  final String x;
+  final double? y;
 }
