@@ -30,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
               fontWeight: FontWeight.normal,
               fontFamily: 'QRegular',
               color: Colors.grey),
+          unselectedItemColor: Colors.white,
           items: [
             BottomNavigationBarItem(
                 label: 'Home', icon: Image.asset('assets/images/home.png')),
