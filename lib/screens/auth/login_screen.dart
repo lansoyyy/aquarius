@@ -47,7 +47,7 @@ class LoginScreen extends StatelessWidget {
                     label: 'Log In',
                     onPressed: (() {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => const HomeScreen()));
+                          builder: (context) => HomeScreen()));
                     }),
                     buttonColor: primary),
                 TextButton(
