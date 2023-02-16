@@ -1,3 +1,4 @@
+import 'package:aquarius/screens/tabs/home/oxygen_tab.dart';
 import 'package:aquarius/utils/colors.dart';
 import 'package:aquarius/widget/text_widget.dart';
 import 'package:flutter/material.dart';
@@ -97,7 +98,10 @@ class HomeTab extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const OxygenTab()));
+                  },
                   child: Card(
                     elevation: 3,
                     child: Container(
