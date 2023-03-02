@@ -1,14 +1,65 @@
 import 'package:aquarius/screens/auth/signup_screen.dart';
-import 'package:aquarius/screens/home_screen.dart';
 import 'package:aquarius/utils/colors.dart';
 import 'package:aquarius/widget/button_widget.dart';
 import 'package:aquarius/widget/textField_widget.dart';
 import 'package:aquarius/widget/text_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final phoneController = TextEditingController();
+
   final passwordController = TextEditingController();
+
+  String verID = " ";
+
+  Future<void> verifyPhone(String number) async {
+    await FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: number,
+      timeout: const Duration(seconds: 20),
+      verificationCompleted: (PhoneAuthCredential credential) {
+        // Fluttertoast.showToast(msg: 'Completed');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: TextRegular(
+                text: 'OTP Completed', fontSize: 14, color: Colors.white),
+          ),
+        );
+      },
+      verificationFailed: (FirebaseAuthException e) {
+        // Fluttertoast.showToast(msg: 'Failed');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content:
+                TextRegular(text: 'Failed', fontSize: 14, color: Colors.white),
+          ),
+        );
+      },
+      codeSent: (String verificationId, int? resendToken) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: TextRegular(
+                text: 'OTP Sent', fontSize: 14, color: Colors.white),
+          ),
+        );
+        verID = verificationId;
+      },
+      codeAutoRetrievalTimeout: (String verificationId) {
+        // Fluttertoast.showToast(msg: 'Timeout');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content:
+                TextRegular(text: 'Timeout', fontSize: 14, color: Colors.white),
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +86,9 @@ class LoginScreen extends StatelessWidget {
                   height: 120,
                 ),
                 TextFieldWidget(
-                    label: 'Phone Number', controller: phoneController),
+                    inputType: TextInputType.number,
+                    label: 'Phone Number',
+                    controller: phoneController),
                 TextFieldWidget(
                     isObscure: true,
                     label: 'Password',
@@ -45,18 +98,10 @@ class LoginScreen extends StatelessWidget {
                 ),
                 ButtonWidget(
                     label: 'Log In',
-                    onPressed: (() {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => HomeScreen()));
+                    onPressed: (() async {
+                      verifyPhone(phoneController.text);
                     }),
                     buttonColor: primary),
-                TextButton(
-                    onPressed: (() {}),
-                    child: TextRegular(
-                        fw: FontWeight.w700,
-                        text: 'Forgot Password?',
-                        fontSize: 15,
-                        color: Colors.white)),
                 const Expanded(
                   child: SizedBox(
                     height: 20,

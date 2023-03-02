@@ -5,15 +5,20 @@ class TextFieldWidget extends StatelessWidget {
   final String label;
   final TextEditingController controller;
   final bool? isObscure;
+  final TextInputType? inputType;
 
   const TextFieldWidget(
-      {required this.label, required this.controller, this.isObscure = false});
+      {required this.label,
+      required this.controller,
+      this.isObscure = false,
+      this.inputType = TextInputType.name});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
       child: TextFormField(
+        keyboardType: inputType,
         controller: controller,
         obscureText: isObscure!,
         style: const TextStyle(color: Colors.black, fontFamily: 'QRegular'),
