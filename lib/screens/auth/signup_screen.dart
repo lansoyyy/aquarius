@@ -1,5 +1,6 @@
 import 'package:aquarius/screens/auth/login_screen.dart';
 import 'package:aquarius/screens/home_screen.dart';
+import 'package:aquarius/services/add_user.dart';
 import 'package:aquarius/utils/colors.dart';
 import 'package:aquarius/widget/button_widget.dart';
 import 'package:aquarius/widget/textField_widget.dart';
@@ -91,6 +92,8 @@ class _SignupScreenState extends State<SignupScreen> {
           smsCode: otpPin,
         ),
       );
+      addUser(firstNameController.text, lastNameController.text,
+          phoneController.text, pondSizeController.text, org);
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => HomeScreen(),
