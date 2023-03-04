@@ -1,4 +1,5 @@
 import 'package:aquarius/widget/text_widget.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -18,8 +19,15 @@ class _DataTabState extends State<DataTab> {
 
   var dropValue = 0;
 
+  DatabaseReference starCountRef =
+      FirebaseDatabase.instance.ref('users/+639639530422');
+
   @override
   Widget build(BuildContext context) {
+    starCountRef.onValue.listen((DatabaseEvent event) {
+      final data = event.snapshot.value;
+      print(data);
+    });
     return SingleChildScrollView(
       child: Container(
         child: Center(
