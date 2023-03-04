@@ -1,8 +1,8 @@
 import 'package:aquarius/screens/tabs/home/oxygen_tab.dart';
 import 'package:aquarius/screens/tabs/home/ph_tab.dart';
-import 'package:aquarius/screens/tabs/home/temp_tab.dart';
 import 'package:aquarius/utils/colors.dart';
 import 'package:aquarius/widget/text_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomeTab extends StatelessWidget {
@@ -27,9 +27,10 @@ class HomeTab extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                 child: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const TempTab()));
+                  onTap: () async {
+                    await FirebaseAuth.instance.signOut();
+                    // Navigator.of(context).push(MaterialPageRoute(
+                    //     builder: (context) => const TempTab()));
                   },
                   child: Card(
                     elevation: 3,
