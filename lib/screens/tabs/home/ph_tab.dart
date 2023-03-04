@@ -3,8 +3,8 @@ import 'package:aquarius/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class PhTab extends StatelessWidget {
-  const PhTab({super.key});
-
+  final String doms;
+  const PhTab({required this.doms});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,8 +67,8 @@ class PhTab extends StatelessWidget {
                         text: 'Domestication:',
                         fontSize: 18,
                         color: Colors.grey),
-                    trailing: TextBold(
-                        text: 'Bangus', fontSize: 16, color: Colors.grey),
+                    trailing:
+                        TextBold(text: doms, fontSize: 16, color: Colors.grey),
                   ),
                 ),
               ),

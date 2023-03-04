@@ -3,8 +3,8 @@ import 'package:aquarius/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class OxygenTab extends StatelessWidget {
-  const OxygenTab({super.key});
-
+  final String doms;
+  const OxygenTab({required this.doms});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,8 +68,8 @@ class OxygenTab extends StatelessWidget {
                         text: 'Domestication:',
                         fontSize: 18,
                         color: Colors.grey),
-                    trailing: TextBold(
-                        text: 'Bangus', fontSize: 16, color: Colors.grey),
+                    trailing:
+                        TextBold(text: doms, fontSize: 16, color: Colors.grey),
                   ),
                 ),
               ),

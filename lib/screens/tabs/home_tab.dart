@@ -23,7 +23,8 @@ class HomeTab extends StatelessWidget {
               ),
               TextBold(text: 'WELCOME', fontSize: 48, color: Colors.white),
               TextRegular(
-                  text: userData['firstName'] + ' ' + userData['lastName'],
+                  text:
+                      userData['firstName'] + ' ' + userData['lastName'] + '!',
                   fontSize: 22,
                   color: Colors.white),
               const SizedBox(
@@ -35,7 +36,9 @@ class HomeTab extends StatelessWidget {
                   onTap: () async {
                     // await FirebaseAuth.instance.signOut();
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const TempTab()));
+                        builder: (context) => TempTab(
+                              doms: userData['doms'],
+                            )));
                   },
                   child: Card(
                     elevation: 3,
@@ -73,8 +76,10 @@ class HomeTab extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => const PhTab()));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => PhTab(
+                              doms: userData['doms'],
+                            )));
                   },
                   child: Card(
                     elevation: 3,
@@ -114,7 +119,9 @@ class HomeTab extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const OxygenTab()));
+                        builder: (context) => OxygenTab(
+                              doms: userData['doms'],
+                            )));
                   },
                   child: Card(
                     elevation: 3,
