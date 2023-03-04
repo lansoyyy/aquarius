@@ -23,8 +23,11 @@ class HomeTab extends StatelessWidget {
               ),
               TextBold(text: 'WELCOME', fontSize: 48, color: Colors.white),
               TextRegular(
-                  text:
-                      userData['firstName'] + ' ' + userData['lastName'] + '!',
+                  text: userData['firstName'] +
+                          ' ' +
+                          userData['lastName'] +
+                          '!' ??
+                      '',
                   fontSize: 22,
                   color: Colors.white),
               const SizedBox(
