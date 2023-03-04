@@ -2,11 +2,13 @@ import 'package:aquarius/screens/tabs/home/oxygen_tab.dart';
 import 'package:aquarius/screens/tabs/home/ph_tab.dart';
 import 'package:aquarius/utils/colors.dart';
 import 'package:aquarius/widget/text_widget.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import 'home/temp_tab.dart';
+
 class HomeTab extends StatelessWidget {
-  const HomeTab({super.key});
+  late dynamic userData;
+  HomeTab({required this.userData});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,10 @@ class HomeTab extends StatelessWidget {
                 height: 40,
               ),
               TextBold(text: 'WELCOME', fontSize: 48, color: Colors.white),
-              TextRegular(text: 'John Doe!', fontSize: 22, color: Colors.white),
+              TextRegular(
+                  text: userData['firstName'] + ' ' + userData['lastName'],
+                  fontSize: 22,
+                  color: Colors.white),
               const SizedBox(
                 height: 20,
               ),
@@ -28,9 +33,9 @@ class HomeTab extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                 child: GestureDetector(
                   onTap: () async {
-                    await FirebaseAuth.instance.signOut();
-                    // Navigator.of(context).push(MaterialPageRoute(
-                    //     builder: (context) => const TempTab()));
+                    // await FirebaseAuth.instance.signOut();
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const TempTab()));
                   },
                   child: Card(
                     elevation: 3,

@@ -4,10 +4,14 @@ import 'package:aquarius/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class SettingsTab extends StatelessWidget {
-  const SettingsTab({super.key});
+  late dynamic userData;
+
+  SettingsTab({required this.userData});
 
   @override
   Widget build(BuildContext context) {
+    String formattedNumber = userData['phone'].substring(0, 8) + "*******";
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: secondary,
@@ -24,19 +28,22 @@ class SettingsTab extends StatelessWidget {
             ListTile(
               title:
                   TextRegular(text: 'First Name', fontSize: 16, color: primary),
-              trailing:
-                  TextBold(text: 'John', fontSize: 18, color: Colors.grey),
+              trailing: TextBold(
+                  text: userData['firstName'],
+                  fontSize: 18,
+                  color: Colors.grey),
             ),
             ListTile(
               title:
                   TextRegular(text: 'Last Name', fontSize: 16, color: primary),
-              trailing: TextBold(text: 'Doe', fontSize: 18, color: Colors.grey),
+              trailing: TextBold(
+                  text: userData['lastName'], fontSize: 18, color: Colors.grey),
             ),
             ListTile(
               title: TextRegular(
                   text: 'Phone Number', fontSize: 16, color: primary),
               trailing: TextBold(
-                  text: '09XXXXXXXXX', fontSize: 18, color: Colors.grey),
+                  text: formattedNumber, fontSize: 18, color: Colors.grey),
             ),
             ListTile(
               title:
@@ -72,14 +79,16 @@ class SettingsTab extends StatelessWidget {
             ListTile(
               title:
                   TextRegular(text: 'Size (Ha)', fontSize: 16, color: primary),
-              trailing:
-                  TextBold(text: '10,000', fontSize: 18, color: Colors.grey),
+              trailing: TextBold(
+                  text: userData['sizeOfPond'],
+                  fontSize: 18,
+                  color: Colors.grey),
             ),
             ListTile(
               title: TextRegular(
                   text: 'Domestication', fontSize: 16, color: primary),
-              trailing:
-                  TextBold(text: 'Bangus', fontSize: 18, color: Colors.grey),
+              trailing: TextBold(
+                  text: userData['doms'], fontSize: 18, color: Colors.grey),
             ),
             const SizedBox(
               height: 40,
