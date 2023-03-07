@@ -44,7 +44,7 @@ dependencies:
   intl: ^0.17.0
   # fluttertoast:
   syncfusion_flutter_gauges:
-  # syncfusion_flutter_charts:
+  syncfusion_flutter_charts:
   intl_phone_field: ^3.1.0
   pin_code_fields: ^7.4.0
   # google_fonts:

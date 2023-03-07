@@ -27,11 +27,14 @@ class _HomeTabState extends State<HomeTab> {
   @override
   void initState() {
     super.initState();
-    starCountRef.onValue.listen((DatabaseEvent event) {
+    FirebaseDatabase.instance
+        .ref('users/${widget.userData['phone']}')
+        .onValue
+        .listen((DatabaseEvent event) {
       final dynamic data = event.snapshot.value;
 
-      var firstKey = data.keys.elementAt(0); // 'name'
-      var firstValue = data.values.elementAt(0); // 'Alice'
+      var firstKey = data.keys.elementAt(0);
+      var firstValue = data.values.elementAt(0);
 
       setState(() {
         date = firstKey;
