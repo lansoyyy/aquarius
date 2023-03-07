@@ -7,10 +7,13 @@ import 'package:aquarius/widget/textField_widget.dart';
 import 'package:aquarius/widget/text_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
+
   @override
   State<SignupScreen> createState() => _SignupScreenState();
 }
@@ -35,6 +38,8 @@ class _SignupScreenState extends State<SignupScreen> {
   String verID = " ";
 
   int screenState = 0;
+
+  final box = GetStorage();
 
   Future<void> verifyPhone(String number) async {
     await FirebaseAuth.instance.verifyPhoneNumber(
@@ -94,6 +99,9 @@ class _SignupScreenState extends State<SignupScreen> {
       );
       addUser(firstNameController.text, lastNameController.text,
           phoneController.text, pondSizeController.text, org);
+
+      box.write('phone', phoneController.text);
+      box.write('password', passwordController.text);
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => HomeScreen(),

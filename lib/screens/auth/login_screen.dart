@@ -1,12 +1,18 @@
 import 'package:aquarius/screens/auth/signup_screen.dart';
 import 'package:aquarius/utils/colors.dart';
 import 'package:aquarius/widget/button_widget.dart';
+import 'package:aquarius/widget/forgot_pass_dialog.dart';
 import 'package:aquarius/widget/textField_widget.dart';
 import 'package:aquarius/widget/text_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
+
+import '../home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -17,6 +23,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final passwordController = TextEditingController();
 
   String verID = " ";
+
+  final box = GetStorage();
 
   Future<void> verifyPhone(String number) async {
     await FirebaseAuth.instance.verifyPhoneNumber(
@@ -99,9 +107,38 @@ class _LoginScreenState extends State<LoginScreen> {
                 ButtonWidget(
                     label: 'Log In',
                     onPressed: (() async {
-                      verifyPhone(phoneController.text);
+                      // verifyPhone(phoneController.text);
+                      if (box.read('phone') != phoneController.text &&
+                          box.read('password') != passwordController.text) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: TextRegular(
+                                text: 'Invalid Account!',
+                                fontSize: 14,
+                                color: Colors.white),
+                          ),
+                        );
+                      } else {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => HomeScreen(),
+                          ),
+                        );
+                      }
                     }),
                     buttonColor: primary),
+                TextButton(
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const ForgotPasswordDialog();
+                          });
+                    },
+                    child: TextRegular(
+                        text: 'Forgot Password?',
+                        fontSize: 14,
+                        color: Colors.white)),
                 const Expanded(
                   child: SizedBox(
                     height: 20,
@@ -122,7 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: (() {
                           Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                  builder: (context) => SignupScreen()));
+                                  builder: (context) => const SignupScreen()));
                         }),
                         child: TextBold(
                             text: "Sign Up",
