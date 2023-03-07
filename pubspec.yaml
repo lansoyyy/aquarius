@@ -49,6 +49,7 @@ dependencies:
   pin_code_fields: ^7.4.0
   google_fonts:
   firebase_database:
+  url_launcher:
 
 
 dev_dependencies:
