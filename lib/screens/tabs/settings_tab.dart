@@ -1,5 +1,6 @@
 import 'package:aquarius/utils/colors.dart';
 import 'package:aquarius/widget/button_widget.dart';
+import 'package:aquarius/widget/change_pass_dialog.dart';
 import 'package:aquarius/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -58,7 +59,13 @@ class SettingsTab extends StatelessWidget {
                     TextBold(
                         text: '********', fontSize: 18, color: Colors.grey),
                     TextButton(
-                      onPressed: (() {}),
+                      onPressed: (() {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return const ChangePasswordDialog();
+                            });
+                      }),
                       child:
                           TextBold(text: 'Edit', fontSize: 14, color: primary),
                     ),
