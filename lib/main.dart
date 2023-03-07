@@ -1,5 +1,4 @@
 import 'package:aquarius/firebase_options.dart';
-import 'package:aquarius/screens/auth/login_screen.dart';
 import 'package:aquarius/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
             if (snapshot.hasData) {
               return HomeScreen();
             } else {
-              return LoginScreen();
+              return HomeScreen();
             }
           }),
     );

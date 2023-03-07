@@ -1,12 +1,30 @@
 import 'package:aquarius/widget/gauges_widget.dart';
 import 'package:aquarius/widget/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class PhTab extends StatelessWidget {
+class PhTab extends StatefulWidget {
   final String doms;
-  const PhTab({required this.doms});
+  final dynamic data;
+  final String date;
+
+  const PhTab({required this.doms, required this.data, required this.date});
+
+  @override
+  State<PhTab> createState() => _PhTabState();
+}
+
+class _PhTabState extends State<PhTab> {
   @override
   Widget build(BuildContext context) {
+    var date =
+        DateTime.fromMillisecondsSinceEpoch(int.parse(widget.date) * 1000);
+
+    var isoFormat = date.toIso8601String(); // '2023-03-07T08:43:34.000Z'
+
+    var customFormat = DateFormat('dd-MM-yyyy').format(date);
+
+    var customFormat1 = DateFormat('hh:mm a').format(date);
     return Scaffold(
       body: Container(
         height: double.infinity,
@@ -36,7 +54,9 @@ class PhTab extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              const GaugeChart(),
+              GaugeChart(
+                data: widget.data['pH'],
+              ),
               const SizedBox(
                 height: 75,
               ),
@@ -49,9 +69,9 @@ class PhTab extends StatelessWidget {
                   ),
                   child: ListTile(
                     title: TextBold(
-                        text: 'DD/MM/YY', fontSize: 18, color: Colors.grey),
+                        text: customFormat, fontSize: 18, color: Colors.grey),
                     trailing: TextBold(
-                        text: 'HH:MM AM', fontSize: 16, color: Colors.grey),
+                        text: customFormat1, fontSize: 16, color: Colors.grey),
                   ),
                 ),
               ),
@@ -67,8 +87,8 @@ class PhTab extends StatelessWidget {
                         text: 'Domestication:',
                         fontSize: 18,
                         color: Colors.grey),
-                    trailing:
-                        TextBold(text: doms, fontSize: 16, color: Colors.grey),
+                    trailing: TextBold(
+                        text: widget.doms, fontSize: 16, color: Colors.grey),
                   ),
                 ),
               ),

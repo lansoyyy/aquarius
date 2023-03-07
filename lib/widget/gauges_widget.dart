@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class GaugeChart extends StatelessWidget {
-  const GaugeChart({Key? key}) : super(key: key);
+  late dynamic data;
+
+  GaugeChart({this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +27,11 @@ class GaugeChart extends StatelessWidget {
               cornerStyle: CornerStyle.startCurve,
             ),
             annotations: <GaugeAnnotation>[
-              const GaugeAnnotation(
+              GaugeAnnotation(
                 angle: 90,
                 widget: Text(
-                  '27.18',
-                  style: TextStyle(
+                  data.toString(),
+                  style: const TextStyle(
                       fontFamily: 'QBold',
                       fontSize: 32,
                       fontWeight: FontWeight.bold,

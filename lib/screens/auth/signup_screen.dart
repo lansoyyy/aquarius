@@ -8,7 +8,7 @@ import 'package:aquarius/widget/text_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -250,7 +250,8 @@ class _SignupScreenState extends State<SignupScreen> {
                                 onPressed: (() {
                                   Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(
-                                          builder: (context) => LoginScreen()));
+                                          builder: (context) =>
+                                              const LoginScreen()));
                                 }),
                                 child: TextBold(
                                     text: "Log In",
@@ -272,29 +273,25 @@ class _SignupScreenState extends State<SignupScreen> {
                             textAlign: TextAlign.center,
                             text: TextSpan(
                               children: [
+                                const TextSpan(
+                                    text: "We just sent a code to ",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: 'QRegular',
+                                        fontSize: 15)),
                                 TextSpan(
-                                  text: "We just sent a code to ",
-                                  style: GoogleFonts.montserrat(
-                                    color: Colors.black87,
-                                    fontSize: 15,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: phoneController.text,
-                                  style: GoogleFonts.montserrat(
-                                    color: Colors.black87,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text:
-                                      "\nEnter the code here and we can continue!",
-                                  style: GoogleFonts.montserrat(
-                                    color: Colors.black87,
-                                    fontSize: 12,
-                                  ),
-                                ),
+                                    text: phoneController.text,
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: 'QRegular',
+                                        fontSize: 15)),
+                                const TextSpan(
+                                    text:
+                                        "\nEnter the code here and we can continue!",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: 'QRegular',
+                                        fontSize: 12)),
                               ],
                             ),
                           ),
@@ -342,13 +339,12 @@ class _SignupScreenState extends State<SignupScreen> {
                           RichText(
                             text: TextSpan(
                               children: [
-                                TextSpan(
-                                  text: "Didn't receive the code? ",
-                                  style: GoogleFonts.montserrat(
-                                    color: Colors.black87,
-                                    fontSize: 12,
-                                  ),
-                                ),
+                                const TextSpan(
+                                    text: "Didn't receive the code? ",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: 'QRegular',
+                                        fontSize: 12)),
                                 WidgetSpan(
                                   child: GestureDetector(
                                     onTap: () {
@@ -356,14 +352,11 @@ class _SignupScreenState extends State<SignupScreen> {
                                         screenState = 0;
                                       });
                                     },
-                                    child: Text(
-                                      "Resend",
-                                      style: GoogleFonts.montserrat(
-                                        color: Colors.black87,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
+                                    child: const Text("Resend",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'QRegular',
+                                            fontSize: 12)),
                                   ),
                                 ),
                               ],
