@@ -1,9 +1,12 @@
 import 'package:aquarius/widget/text_widget.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 // import 'package:syncfusion_flutter_charts/charts.dart';
 
 class DataTab extends StatefulWidget {
+  late dynamic userData;
+  DataTab({super.key, required this.userData});
   @override
   State<DataTab> createState() => _DataTabState();
 }
@@ -18,6 +21,27 @@ class _DataTabState extends State<DataTab> {
   ];
 
   var dropValue = 0;
+
+  var hasLoaded = false;
+
+  late String date = '';
+  late dynamic data1;
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseDatabase.instance
+        .ref('users/${widget.userData['phone']}')
+        .onValue
+        .listen((DatabaseEvent event) {
+      final dynamic data = event.snapshot.value;
+
+      setState(() {
+        data1 = data;
+        hasLoaded = true;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

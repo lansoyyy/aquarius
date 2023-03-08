@@ -25,7 +25,9 @@ class _HomeScreenState extends State<HomeScreen> {
       HomeTab(
         userData: userData1,
       ),
-      DataTab(),
+      DataTab(
+        userData: userData1,
+      ),
       SettingsTab(
         userData: userData1,
       )
