@@ -26,6 +26,7 @@ class _PhTabState extends State<PhTab> {
     var customFormat = DateFormat('dd-MM-yyyy').format(date);
 
     var customFormat1 = DateFormat('hh:mm a').format(date);
+
     return Scaffold(
       body: Container(
         height: double.infinity,
@@ -56,6 +57,7 @@ class _PhTabState extends State<PhTab> {
                 height: 20,
               ),
               GaugeChart(
+                sign: '',
                 data: widget.data['pH'],
                 opium: widget.doms == 'Lato'
                     ? '8.10 - 8.40'

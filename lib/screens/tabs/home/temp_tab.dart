@@ -56,16 +56,17 @@ class _TempTabState extends State<TempTab> {
                 height: 20,
               ),
               GaugeChart(
+                sign: 'C',
                 data: widget.data['temp'],
                 opium: widget.doms == 'Lato'
-                    ? '27.4 -  28.8 C'
+                    ? '27.4 - 28.8'
                     : widget.doms == 'Tilapia'
-                        ? '22 -  29 C'
+                        ? '22 - 29'
                         : widget.doms == 'Bangus'
-                            ? '26 -  32 C'
+                            ? '26 - 32'
                             : widget.doms == 'Pansat'
-                                ? '28 -  31 C'
-                                : '27 -  30 C',
+                                ? '28 - 31'
+                                : '27 - 30',
               ),
               const SizedBox(
                 height: 75,

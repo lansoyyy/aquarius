@@ -4,11 +4,22 @@ import 'package:syncfusion_flutter_gauges/gauges.dart';
 class GaugeChart extends StatelessWidget {
   late dynamic data;
   final String opium;
+  final String sign;
 
-  GaugeChart({super.key, this.data, required this.opium});
+  GaugeChart({super.key, this.data, required this.opium, required this.sign});
 
   @override
   Widget build(BuildContext context) {
+    print(opium);
+    List<String> parts = opium.split("-");
+    String secondPart = parts[1].trim();
+    double value = double.parse(secondPart);
+
+    double partialPercentage = data / value;
+    double totalPercentage = partialPercentage * 100;
+
+    print(opium);
+
     return SizedBox(
       height: 220,
       child: SfRadialGauge(
@@ -22,7 +33,7 @@ class GaugeChart extends StatelessWidget {
             radiusFactor: 0.8,
             canScaleToFit: true,
             axisLineStyle: const AxisLineStyle(
-              thickness: 0.1,
+              thickness: 0.5,
               color: Color.fromARGB(30, 0, 169, 181),
               thicknessUnit: GaugeSizeUnit.factor,
               cornerStyle: CornerStyle.startCurve,
@@ -53,7 +64,7 @@ class GaugeChart extends StatelessWidget {
                           color: Colors.white),
                     ),
                     Text(
-                      opium,
+                      '$opium ${sign}',
                       style: const TextStyle(
                           fontFamily: 'QBold',
                           fontSize: 16,
@@ -72,17 +83,17 @@ class GaugeChart extends StatelessWidget {
                   startValue: 0, endValue: 1.0, color: const Color(0xffB9F3E4)),
               GaugeRange(
                   startValue: 1.0,
-                  endValue: 2.5,
-                  color: const Color(0xffB9F3E4)),
+                  endValue: 100,
+                  color: Colors.grey.withOpacity(.5)),
               GaugeRange(
                   startValue: 2.5,
                   endValue: 4.8,
                   color: const Color(0xffB9F3E4)),
             ],
-            pointers: const <GaugePointer>[
+            pointers: <GaugePointer>[
               RangePointer(
-                  color: Color.fromARGB(255, 192, 236, 225),
-                  value: 100,
+                  color: const Color.fromARGB(255, 192, 236, 225),
+                  value: totalPercentage,
                   width: 0.1,
                   sizeUnit: GaugeSizeUnit.factor,
                   cornerStyle: CornerStyle.bothCurve),

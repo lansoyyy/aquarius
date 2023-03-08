@@ -57,16 +57,17 @@ class _OxygenTabState extends State<OxygenTab> {
                 height: 20,
               ),
               GaugeChart(
+                sign: 'mg/L',
                 data: widget.data['DO'],
                 opium: widget.doms == 'Lato'
-                    ? '8.10 -  8.40 mg/L'
+                    ? '8.10 - 8.40'
                     : widget.doms == 'Tilapia'
-                        ? '7.00 -  9.00 mg/L'
+                        ? '7.00 - 9.00'
                         : widget.doms == 'Bangus'
-                            ? '7.50 -  8.30 mg/L'
+                            ? '7.50 - 8.30'
                             : widget.doms == 'Pansat'
-                                ? '7.00 -  8.50 mg/L'
-                                : '7.50 -  8.50 mg/L',
+                                ? '7.00 - 8.50'
+                                : '7.50 - 8.50',
               ),
               const SizedBox(
                 height: 75,
