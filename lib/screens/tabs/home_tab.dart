@@ -9,7 +9,7 @@ import 'home/temp_tab.dart';
 
 class HomeTab extends StatefulWidget {
   late dynamic userData;
-  HomeTab({required this.userData});
+  HomeTab({super.key, required this.userData});
 
   @override
   State<HomeTab> createState() => _HomeTabState();
@@ -26,6 +26,7 @@ class _HomeTabState extends State<HomeTab> {
 
   @override
   void initState() {
+    print(widget.userData['phone']);
     super.initState();
     FirebaseDatabase.instance
         .ref('users/${widget.userData['phone']}')
