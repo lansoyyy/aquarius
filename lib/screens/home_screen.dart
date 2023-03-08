@@ -18,57 +18,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
   late dynamic userData1 = {};
 
+  final Stream<DocumentSnapshot> userData = FirebaseFirestore.instance
+      .collection('User')
+      .doc(FirebaseAuth.instance.currentUser!.uid)
+      .snapshots();
+
   @override
   Widget build(BuildContext context) {
     print(FirebaseAuth.instance.currentUser!.uid);
     final tabs = [
-      HomeTab(
-        userData: userData1,
-      ),
-      DataTab(
-        userData: userData1,
-      ),
-      SettingsTab(
-        userData: userData1,
-      )
-    ];
-    final Stream<DocumentSnapshot> userData = FirebaseFirestore.instance
-        .collection('User')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .snapshots();
-    return Scaffold(
-      bottomNavigationBar: Material(
-        elevation: 0,
-        color: Colors.transparent,
-        child: BottomNavigationBar(
-          currentIndex: _index,
-          backgroundColor: secondary,
-          selectedLabelStyle: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontFamily: 'QBold',
-              color: Colors.white),
-          unselectedLabelStyle: const TextStyle(
-              fontWeight: FontWeight.normal,
-              fontFamily: 'QRegular',
-              color: Colors.grey),
-          unselectedItemColor: Colors.white,
-          items: [
-            BottomNavigationBarItem(
-                label: 'Home', icon: Image.asset('assets/images/home.png')),
-            BottomNavigationBarItem(
-                label: 'Data', icon: Image.asset('assets/images/data.png')),
-            BottomNavigationBarItem(
-                label: 'Settings',
-                icon: Image.asset('assets/images/profile.png')),
-          ],
-          onTap: (value) {
-            setState(() {
-              _index = value;
-            });
-          },
-        ),
-      ),
-      body: StreamBuilder<DocumentSnapshot>(
+      StreamBuilder<DocumentSnapshot>(
           stream: userData,
           builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
             if (!snapshot.hasData) {
@@ -80,18 +39,84 @@ class _HomeScreenState extends State<HomeScreen> {
             }
 
             dynamic data = snapshot.data;
-            userData1 = data;
-
-            return Container(
-              height: double.infinity,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/images/background.png'),
-                      fit: BoxFit.cover)),
-              child: SafeArea(child: tabs[_index]),
+            return HomeTab(
+              userData: data,
             );
           }),
-    );
+      StreamBuilder<DocumentSnapshot>(
+          stream: userData,
+          builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+            if (!snapshot.hasData) {
+              return const Center(child: Text('Loading'));
+            } else if (snapshot.hasError) {
+              return const Center(child: Text('Something went wrong'));
+            } else if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+
+            dynamic data = snapshot.data;
+            return DataTab(
+              userData: data,
+            );
+          }),
+      StreamBuilder<DocumentSnapshot>(
+          stream: userData,
+          builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+            if (!snapshot.hasData) {
+              return const Center(child: Text('Loading'));
+            } else if (snapshot.hasError) {
+              return const Center(child: Text('Something went wrong'));
+            } else if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+
+            dynamic data = snapshot.data;
+            return SettingsTab(
+              userData: data,
+            );
+          })
+    ];
+
+    return Scaffold(
+        bottomNavigationBar: Material(
+          elevation: 0,
+          color: Colors.transparent,
+          child: BottomNavigationBar(
+            currentIndex: _index,
+            backgroundColor: secondary,
+            selectedLabelStyle: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontFamily: 'QBold',
+                color: Colors.white),
+            unselectedLabelStyle: const TextStyle(
+                fontWeight: FontWeight.normal,
+                fontFamily: 'QRegular',
+                color: Colors.grey),
+            unselectedItemColor: Colors.white,
+            items: [
+              BottomNavigationBarItem(
+                  label: 'Home', icon: Image.asset('assets/images/home.png')),
+              BottomNavigationBarItem(
+                  label: 'Data', icon: Image.asset('assets/images/data.png')),
+              BottomNavigationBarItem(
+                  label: 'Settings',
+                  icon: Image.asset('assets/images/profile.png')),
+            ],
+            onTap: (value) {
+              setState(() {
+                _index = value;
+              });
+            },
+          ),
+        ),
+        body: Container(
+          height: double.infinity,
+          width: double.infinity,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/background.png'),
+                  fit: BoxFit.cover)),
+          child: SafeArea(child: tabs[_index]),
+        ));
   }
 }

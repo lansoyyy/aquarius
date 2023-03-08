@@ -31,13 +31,13 @@ class _HomeTabState extends State<HomeTab> {
         .ref('users/${widget.userData['phone']}')
         .onValue
         .listen((DatabaseEvent event) {
+      final dynamic data = event.snapshot.value;
+
+      var firstKey = data.keys.elementAt(0);
+      var firstValue = data.values.elementAt(0);
+
       setState(() {
-        final dynamic data = event.snapshot.value;
-
-        var firstKey = data.keys.elementAt(0);
-        var firstValue = data.values.elementAt(0);
         date = firstKey;
-
         data1 = firstValue;
 
         hasLoaded = true;
