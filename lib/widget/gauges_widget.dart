@@ -3,8 +3,9 @@ import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class GaugeChart extends StatelessWidget {
   late dynamic data;
+  final String opium;
 
-  GaugeChart({this.data});
+  GaugeChart({super.key, this.data, required this.opium});
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +43,8 @@ class GaugeChart extends StatelessWidget {
                 angle: 90,
                 positionFactor: 1.50,
                 widget: Column(
-                  children: const [
-                    Text(
+                  children: [
+                    const Text(
                       'Optimum at',
                       style: TextStyle(
                           fontFamily: 'QBold',
@@ -52,14 +53,14 @@ class GaugeChart extends StatelessWidget {
                           color: Colors.white),
                     ),
                     Text(
-                      '26.0 - 32.0 C',
-                      style: TextStyle(
+                      opium,
+                      style: const TextStyle(
                           fontFamily: 'QBold',
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: Colors.white),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                   ],

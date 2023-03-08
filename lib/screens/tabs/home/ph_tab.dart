@@ -8,7 +8,8 @@ class PhTab extends StatefulWidget {
   final dynamic data;
   final String date;
 
-  const PhTab({required this.doms, required this.data, required this.date});
+  const PhTab(
+      {super.key, required this.doms, required this.data, required this.date});
 
   @override
   State<PhTab> createState() => _PhTabState();
@@ -56,6 +57,15 @@ class _PhTabState extends State<PhTab> {
               ),
               GaugeChart(
                 data: widget.data['pH'],
+                opium: widget.doms == 'Lato'
+                    ? '8.10 - 8.40'
+                    : widget.doms == 'Tilapia'
+                        ? '7.00 - 9.00'
+                        : widget.doms == 'Bangus'
+                            ? '7.50 - 8.30 '
+                            : widget.doms == 'Pansat'
+                                ? '7.00 - 8.50'
+                                : '7.50 - 8.50',
               ),
               const SizedBox(
                 height: 75,

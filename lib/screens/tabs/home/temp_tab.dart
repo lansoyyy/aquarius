@@ -8,7 +8,8 @@ class TempTab extends StatefulWidget {
   final dynamic data;
   final String date;
 
-  const TempTab({required this.doms, required this.data, required this.date});
+  const TempTab(
+      {super.key, required this.doms, required this.data, required this.date});
 
   @override
   State<TempTab> createState() => _TempTabState();
@@ -17,7 +18,6 @@ class TempTab extends StatefulWidget {
 class _TempTabState extends State<TempTab> {
   @override
   Widget build(BuildContext context) {
-    print(widget.date);
     var date =
         DateTime.fromMillisecondsSinceEpoch(int.parse(widget.date) * 1000);
 
@@ -57,6 +57,15 @@ class _TempTabState extends State<TempTab> {
               ),
               GaugeChart(
                 data: widget.data['temp'],
+                opium: widget.doms == 'Lato'
+                    ? '27.4 -  28.8 C'
+                    : widget.doms == 'Tilapia'
+                        ? '22 -  29 C'
+                        : widget.doms == 'Bangus'
+                            ? '26 -  32 C'
+                            : widget.doms == 'Pansat'
+                                ? '28 -  31 C'
+                                : '27 -  30 C',
               ),
               const SizedBox(
                 height: 75,

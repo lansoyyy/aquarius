@@ -8,7 +8,8 @@ class OxygenTab extends StatefulWidget {
   final dynamic data;
   final String date;
 
-  const OxygenTab({required this.doms, required this.data, required this.date});
+  const OxygenTab(
+      {super.key, required this.doms, required this.data, required this.date});
 
   @override
   State<OxygenTab> createState() => _OxygenTabState();
@@ -57,6 +58,15 @@ class _OxygenTabState extends State<OxygenTab> {
               ),
               GaugeChart(
                 data: widget.data['DO'],
+                opium: widget.doms == 'Lato'
+                    ? '8.10 -  8.40 mg/L'
+                    : widget.doms == 'Tilapia'
+                        ? '7.00 -  9.00 mg/L'
+                        : widget.doms == 'Bangus'
+                            ? '7.50 -  8.30 mg/L'
+                            : widget.doms == 'Pansat'
+                                ? '7.00 -  8.50 mg/L'
+                                : '7.50 -  8.50 mg/L',
               ),
               const SizedBox(
                 height: 75,
