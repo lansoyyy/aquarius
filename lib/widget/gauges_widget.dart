@@ -45,7 +45,7 @@ class GaugeChart extends StatelessWidget {
                   data.toString(),
                   style: const TextStyle(
                       fontFamily: 'QBold',
-                      fontSize: 32,
+                      fontSize: 48,
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
                 ),
@@ -64,7 +64,7 @@ class GaugeChart extends StatelessWidget {
                           color: Colors.white),
                     ),
                     Text(
-                      '$opium ${sign}',
+                      '$opium $sign',
                       style: const TextStyle(
                           fontFamily: 'QBold',
                           fontSize: 16,
