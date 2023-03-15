@@ -104,7 +104,7 @@ class _SignupScreenState extends State<SignupScreen> {
       box.write('password', passwordController.text);
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => HomeScreen(),
+          builder: (context) => const HomeScreen(),
         ),
       );
     } catch (e) {
@@ -261,108 +261,112 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       ],
                     )
-                  : Center(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          RichText(
-                            textAlign: TextAlign.center,
-                            text: TextSpan(
-                              children: [
-                                const TextSpan(
-                                    text: "We just sent a code to ",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: 'QRegular',
-                                        fontSize: 15)),
-                                TextSpan(
-                                    text: phoneController.text,
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: 'QRegular',
-                                        fontSize: 15)),
-                                const TextSpan(
-                                    text:
-                                        "\nEnter the code here and we can continue!",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: 'QRegular',
-                                        fontSize: 12)),
-                              ],
+                  : Scaffold(
+                      backgroundColor: Colors.white,
+                      body: Center(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const SizedBox(
+                              height: 30,
                             ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20, right: 20),
-                            child: PinCodeTextField(
-                              appContext: context,
-                              length: 6,
-                              onChanged: (value) {
-                                setState(() {
-                                  otpPin = value;
-                                });
-                              },
-                              pinTheme: PinTheme(
-                                activeColor: Colors.blue,
-                                selectedColor: Colors.blue,
-                                inactiveColor: Colors.black26,
+                            RichText(
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
+                                children: [
+                                  const TextSpan(
+                                      text: "We just sent a code to ",
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: 'QRegular',
+                                          fontSize: 15)),
+                                  TextSpan(
+                                      text: phoneController.text,
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: 'QRegular',
+                                          fontSize: 15)),
+                                  const TextSpan(
+                                      text:
+                                          "\nEnter the code here and we can continue!",
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: 'QRegular',
+                                          fontSize: 12)),
+                                ],
                               ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          ButtonWidget(
-                              label: 'Continue',
-                              onPressed: (() {
-                                if (screenState == 0) {
-                                  if (phoneController.text.isEmpty) {
-                                  } else {
-                                    verifyPhone(phoneController.text);
-                                  }
-                                } else {
-                                  if (otpPin.length >= 6) {
-                                    verifyOTP();
-                                  }
-                                }
-                              }),
-                              buttonColor: primary),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          RichText(
-                            text: TextSpan(
-                              children: [
-                                const TextSpan(
-                                    text: "Didn't receive the code? ",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: 'QRegular',
-                                        fontSize: 12)),
-                                WidgetSpan(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        screenState = 0;
-                                      });
-                                    },
-                                    child: const Text("Resend",
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontFamily: 'QRegular',
-                                            fontSize: 12)),
-                                  ),
-                                ),
-                              ],
+                            const SizedBox(
+                              height: 20,
                             ),
-                          ),
-                        ],
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 20, right: 20),
+                              child: PinCodeTextField(
+                                appContext: context,
+                                length: 6,
+                                onChanged: (value) {
+                                  setState(() {
+                                    otpPin = value;
+                                  });
+                                },
+                                pinTheme: PinTheme(
+                                  activeColor: Colors.blue,
+                                  selectedColor: Colors.blue,
+                                  inactiveColor: Colors.black26,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            ButtonWidget(
+                                label: 'Continue',
+                                onPressed: (() {
+                                  if (screenState == 0) {
+                                    if (phoneController.text.isEmpty) {
+                                    } else {
+                                      verifyPhone(phoneController.text);
+                                    }
+                                  } else {
+                                    if (otpPin.length >= 6) {
+                                      verifyOTP();
+                                    }
+                                  }
+                                }),
+                                buttonColor: primary),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                children: [
+                                  const TextSpan(
+                                      text: "Didn't receive the code? ",
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: 'QRegular',
+                                          fontSize: 12)),
+                                  WidgetSpan(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          screenState = 0;
+                                        });
+                                      },
+                                      child: const Text("Resend",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontFamily: 'QRegular',
+                                              fontSize: 12)),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     )),
         ),
