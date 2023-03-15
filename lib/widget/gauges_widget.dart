@@ -80,21 +80,15 @@ class GaugeChart extends StatelessWidget {
             ],
             ranges: [
               GaugeRange(
-                  startValue: 0, endValue: 1.0, color: const Color(0xffB9F3E4)),
-              GaugeRange(
                   startValue: 1.0,
                   endValue: 100,
                   color: Colors.grey.withOpacity(.5)),
-              GaugeRange(
-                  startValue: 2.5,
-                  endValue: 4.8,
-                  color: const Color(0xffB9F3E4)),
             ],
             pointers: <GaugePointer>[
               RangePointer(
                   color: const Color.fromARGB(255, 192, 236, 225),
                   value: totalPercentage,
-                  width: 0.1,
+                  width: 0.2,
                   sizeUnit: GaugeSizeUnit.factor,
                   cornerStyle: CornerStyle.bothCurve),
             ],
