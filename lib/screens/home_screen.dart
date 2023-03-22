@@ -99,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
               BottomNavigationBarItem(
                   label: 'Data', icon: Image.asset('assets/images/data.png')),
               BottomNavigationBarItem(
-                  label: 'Settings',
+                  label: 'Profile',
                   icon: Image.asset('assets/images/profile.png')),
             ],
             onTap: (value) {
