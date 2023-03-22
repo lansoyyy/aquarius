@@ -1,6 +1,5 @@
 import 'package:aquarius/firebase_options.dart';
-import 'package:aquarius/screens/auth/login_screen.dart';
-import 'package:aquarius/screens/home_screen.dart';
+import 'package:aquarius/screens/splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -25,9 +24,9 @@ class MyApp extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return const HomeScreen();
+              return const SplashScreen();
             } else {
-              return const LoginScreen();
+              return const SplashScreen();
             }
           }),
     );
