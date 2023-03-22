@@ -77,46 +77,52 @@ class _HomeScreenState extends State<HomeScreen> {
           })
     ];
 
-    return Scaffold(
-        bottomNavigationBar: Material(
-          elevation: 0,
-          color: Colors.transparent,
-          child: BottomNavigationBar(
-            currentIndex: _index,
-            backgroundColor: secondary,
-            selectedLabelStyle: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontFamily: 'QBold',
-                color: Colors.white),
-            unselectedLabelStyle: const TextStyle(
-                fontWeight: FontWeight.normal,
-                fontFamily: 'QRegular',
-                color: Colors.grey),
-            unselectedItemColor: Colors.white,
-            items: [
-              BottomNavigationBarItem(
-                  label: 'Home', icon: Image.asset('assets/images/home.png')),
-              BottomNavigationBarItem(
-                  label: 'Data', icon: Image.asset('assets/images/data.png')),
-              BottomNavigationBarItem(
-                  label: 'Profile',
-                  icon: Image.asset('assets/images/profile.png')),
-            ],
-            onTap: (value) {
-              setState(() {
-                _index = value;
-              });
-            },
+    return RefreshIndicator(
+      onRefresh: () {
+        return Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => const HomeScreen()));
+      },
+      child: Scaffold(
+          bottomNavigationBar: Material(
+            elevation: 0,
+            color: Colors.transparent,
+            child: BottomNavigationBar(
+              currentIndex: _index,
+              backgroundColor: secondary,
+              selectedLabelStyle: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'QBold',
+                  color: Colors.white),
+              unselectedLabelStyle: const TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontFamily: 'QRegular',
+                  color: Colors.grey),
+              unselectedItemColor: Colors.white,
+              items: [
+                BottomNavigationBarItem(
+                    label: 'Home', icon: Image.asset('assets/images/home.png')),
+                BottomNavigationBarItem(
+                    label: 'Data', icon: Image.asset('assets/images/data.png')),
+                BottomNavigationBarItem(
+                    label: 'Profile',
+                    icon: Image.asset('assets/images/profile.png')),
+              ],
+              onTap: (value) {
+                setState(() {
+                  _index = value;
+                });
+              },
+            ),
           ),
-        ),
-        body: Container(
-          height: double.infinity,
-          width: double.infinity,
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/images/background.png'),
-                  fit: BoxFit.cover)),
-          child: SafeArea(child: tabs[_index]),
-        ));
+          body: Container(
+            height: double.infinity,
+            width: double.infinity,
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/images/background.png'),
+                    fit: BoxFit.cover)),
+            child: SafeArea(child: tabs[_index]),
+          )),
+    );
   }
 }
