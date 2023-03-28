@@ -254,14 +254,30 @@ class _SignupScreenState extends State<SignupScreen> {
                         ButtonWidget(
                             label: 'Sign Up',
                             onPressed: (() {
-                              if (screenState == 0) {
-                                if (phoneController.text.isEmpty) {
-                                } else {
-                                  verifyPhone(phoneController.text);
-                                }
+                              if (phoneController.text == '' ||
+                                  firstNameController.text == '' ||
+                                  lastNameController.text == '' ||
+                                  passwordController.text == '' ||
+                                  pondSizeController.text == '') {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: TextRegular(
+                                        text:
+                                            'Cannot Procceed. Supply Missing Fields',
+                                        fontSize: 14,
+                                        color: Colors.white),
+                                  ),
+                                );
                               } else {
-                                if (otpPin.length >= 6) {
-                                  verifyOTP();
+                                if (screenState == 0) {
+                                  if (phoneController.text.isEmpty) {
+                                  } else {
+                                    verifyPhone(phoneController.text);
+                                  }
+                                } else {
+                                  if (otpPin.length >= 6) {
+                                    verifyOTP();
+                                  }
                                 }
                               }
                             }),
