@@ -152,6 +152,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         TextFieldWidget(
                             label: 'Last Name', controller: lastNameController),
                         TextFieldWidget(
+                            showEye: true,
                             isObscure: true,
                             label: 'Password',
                             controller: passwordController),
