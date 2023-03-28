@@ -98,6 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     label: 'Phone Number',
                     controller: phoneController),
                 TextFieldWidget(
+                    showEye: true,
                     isObscure: true,
                     label: 'Password',
                     controller: passwordController),

@@ -31,7 +31,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         obscureText: widget.isObscure!,
         style: const TextStyle(color: Colors.black, fontFamily: 'QRegular'),
         decoration: InputDecoration(
-          suffixIcon: widget.showEye!
+          suffixIcon: widget.showEye! == true
               ? IconButton(
                   onPressed: () {
                     setState(() {
