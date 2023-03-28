@@ -93,10 +93,40 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(
                   height: 120,
                 ),
-                TextFieldWidget(
-                    inputType: TextInputType.number,
-                    label: 'Phone Number',
-                    controller: phoneController),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
+                  child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    controller: phoneController,
+                    style: const TextStyle(
+                        color: Colors.black, fontFamily: 'QRegular'),
+                    decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(width: 1, color: Colors.white),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 1, color: primary),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      labelText: 'Phone Number',
+                      labelStyle: const TextStyle(
+                        fontFamily: 'QBold',
+                        color: Colors.grey,
+                        fontSize: 16.0,
+                      ),
+                      hintText: 'ie: +639XXXXXXXXX',
+                      hintStyle: const TextStyle(
+                        fontFamily: 'QRegular',
+                        color: Colors.grey,
+                        fontSize: 14.0,
+                      ),
+                    ),
+                  ),
+                ),
                 TextFieldWidget(
                     showEye: true,
                     isObscure: true,
