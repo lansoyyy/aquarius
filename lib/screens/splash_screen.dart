@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:aquarius/screens/auth/login_screen.dart';
+import 'package:aquarius/screens/home_screen.dart';
 import 'package:aquarius/widget/text_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,8 +19,17 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     Timer(const Duration(seconds: 5), () async {
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const LoginScreen()));
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => StreamBuilder<User?>(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return const HomeScreen();
+              } else {
+                return const LoginScreen();
+              }
+            }),
+      ));
     });
   }
 
