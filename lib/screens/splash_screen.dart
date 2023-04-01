@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(const Duration(seconds: 5), () async {
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => LoginScreen()));
+          MaterialPageRoute(builder: (context) => const LoginScreen()));
     });
   }
 
@@ -63,7 +63,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 height: 10,
               ),
               TextRegular(
-                  text: 'Amorres, Areglo, Basmayor, Gonzales, Puerto',
+                  text: 'Amores, Arreglo, Basmayor, Gonzales, Puerto',
                   fontSize: 12,
                   color: Colors.white60),
               const SizedBox(
