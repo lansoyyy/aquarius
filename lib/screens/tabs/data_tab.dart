@@ -161,176 +161,175 @@ class _DataTabState extends State<DataTab> {
             TextRegular(text: 'pH Level', fontSize: 18, color: Colors.white),
             Padding(
               padding: const EdgeInsets.only(top: 10, bottom: 10),
-              child: InteractiveViewer(
-                child: Card(
-                  elevation: 3,
-                  child: Container(
-                    height: 150,
-                    width: 300,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: SfCartesianChart(
-                        // Initialize category axis
-                        primaryXAxis: CategoryAxis(),
-                        series: <ChartSeries>[
-                          // Initialize line series
-                          filter == 'Today'
-                              ? LineSeries<ChartData, String>(
-                                  dataSource: [
-                                      // Bind data source
-                                      for (int i = 0; i < datas1.length; i++)
-                                        ChartData(
-                                            i.toString(), datas1[i]['pH']),
-                                    ],
-                                  xValueMapper: (ChartData data, _) => data.x,
-                                  yValueMapper: (ChartData data, _) => data.y)
-                              : filter == 'Yesterday'
-                                  ? LineSeries<ChartData, String>(
-                                      dataSource: [
-                                          // Bind data source
-                                          for (int i = 0;
-                                              i < datas5.length;
-                                              i++)
-                                            ChartData(
-                                                i.toString(), datas5[i]['pH']),
-                                        ],
-                                      xValueMapper: (ChartData data, _) =>
-                                          data.x,
-                                      yValueMapper: (ChartData data, _) =>
-                                          data.y)
-                                  : filter == '2 Days Ago'
-                                      ? LineSeries<ChartData, String>(
-                                          dataSource: [
-                                              // Bind data source
-                                              for (int i = 0;
-                                                  i < datas2.length;
-                                                  i++)
-                                                ChartData(i.toString(),
-                                                    datas2[i]['pH']),
-                                            ],
-                                          xValueMapper: (ChartData data, _) =>
-                                              data.x,
-                                          yValueMapper: (ChartData data, _) =>
-                                              data.y)
-                                      : filter == 'Last Week'
-                                          ? LineSeries<ChartData, String>(
-                                              dataSource: [
-                                                  // Bind data source
-                                                  for (int i = 0;
-                                                      i < datas3.length;
-                                                      i++)
-                                                    ChartData(i.toString(),
-                                                        datas3[i]['pH']),
-                                                ],
-                                              xValueMapper:
-                                                  (ChartData data, _) => data.x,
-                                              yValueMapper:
-                                                  (ChartData data, _) => data.y)
-                                          : LineSeries<ChartData, String>(
-                                              dataSource: [
-                                                  // Bind data source
-                                                  for (int i = 0;
-                                                      i < datas4.length;
-                                                      i++)
-                                                    ChartData(i.toString(),
-                                                        datas4[i]['pH']),
-                                                ],
-                                              xValueMapper:
-                                                  (ChartData data, _) => data.x,
-                                              yValueMapper:
-                                                  (ChartData data, _) => data.y)
-                        ]),
+              child: Card(
+                elevation: 3,
+                child: Container(
+                  height: 150,
+                  width: 300,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(5),
                   ),
+                  child: SfCartesianChart(
+                      zoomPanBehavior: ZoomPanBehavior(
+                          enableDoubleTapZooming: true,
+                          enableMouseWheelZooming: true,
+                          enablePanning: true,
+                          enablePinching: true,
+                          enableSelectionZooming: true),
+                      // Initialize category axis
+                      primaryXAxis: CategoryAxis(),
+                      series: <ChartSeries>[
+                        // Initialize line series
+                        filter == 'Today'
+                            ? LineSeries<ChartData, String>(
+                                dataSource: [
+                                    // Bind data source
+                                    for (int i = 0; i < datas1.length; i++)
+                                      ChartData(i.toString(), datas1[i]['pH']),
+                                  ],
+                                xValueMapper: (ChartData data, _) => data.x,
+                                yValueMapper: (ChartData data, _) => data.y)
+                            : filter == 'Yesterday'
+                                ? LineSeries<ChartData, String>(
+                                    dataSource: [
+                                        // Bind data source
+                                        for (int i = 0; i < datas5.length; i++)
+                                          ChartData(
+                                              i.toString(), datas5[i]['pH']),
+                                      ],
+                                    xValueMapper: (ChartData data, _) => data.x,
+                                    yValueMapper: (ChartData data, _) => data.y)
+                                : filter == '2 Days Ago'
+                                    ? LineSeries<ChartData, String>(
+                                        dataSource: [
+                                            // Bind data source
+                                            for (int i = 0;
+                                                i < datas2.length;
+                                                i++)
+                                              ChartData(i.toString(),
+                                                  datas2[i]['pH']),
+                                          ],
+                                        xValueMapper: (ChartData data, _) =>
+                                            data.x,
+                                        yValueMapper: (ChartData data, _) =>
+                                            data.y)
+                                    : filter == 'Last Week'
+                                        ? LineSeries<ChartData, String>(
+                                            dataSource: [
+                                                // Bind data source
+                                                for (int i = 0;
+                                                    i < datas3.length;
+                                                    i++)
+                                                  ChartData(i.toString(),
+                                                      datas3[i]['pH']),
+                                              ],
+                                            xValueMapper: (ChartData data, _) =>
+                                                data.x,
+                                            yValueMapper: (ChartData data, _) =>
+                                                data.y)
+                                        : LineSeries<ChartData, String>(
+                                            dataSource: [
+                                                // Bind data source
+                                                for (int i = 0;
+                                                    i < datas4.length;
+                                                    i++)
+                                                  ChartData(i.toString(),
+                                                      datas4[i]['pH']),
+                                              ],
+                                            xValueMapper: (ChartData data, _) =>
+                                                data.x,
+                                            yValueMapper: (ChartData data, _) =>
+                                                data.y)
+                      ]),
                 ),
               ),
             ),
             TextRegular(text: 'Temperature', fontSize: 18, color: Colors.white),
             Padding(
               padding: const EdgeInsets.only(top: 10, bottom: 10),
-              child: InteractiveViewer(
-                child: Card(
-                  elevation: 3,
-                  child: Container(
-                    height: 150,
-                    width: 300,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: SfCartesianChart(
-                        // Initialize category axis
-                        primaryXAxis: CategoryAxis(),
-                        series: <ChartSeries>[
-                          // Initialize line series
-                          filter == 'Today'
-                              ? LineSeries<ChartData, String>(
-                                  dataSource: [
-                                      // Bind data source
-                                      for (int i = 0; i < datas1.length; i++)
-                                        ChartData(
-                                            i.toString(), datas1[i]['temp']),
-                                    ],
-                                  xValueMapper: (ChartData data, _) => data.x,
-                                  yValueMapper: (ChartData data, _) => data.y)
-                              : filter == 'Yesterday'
-                                  ? LineSeries<ChartData, String>(
-                                      dataSource: [
-                                          // Bind data source
-                                          for (int i = 0;
-                                              i < datas5.length;
-                                              i++)
-                                            ChartData(i.toString(),
-                                                datas5[i]['temp']),
-                                        ],
-                                      xValueMapper: (ChartData data, _) =>
-                                          data.x,
-                                      yValueMapper: (ChartData data, _) =>
-                                          data.y)
-                                  : filter == '2 Days Ago'
-                                      ? LineSeries<ChartData, String>(
-                                          dataSource: [
-                                              // Bind data source
-                                              for (int i = 0;
-                                                  i < datas2.length;
-                                                  i++)
-                                                ChartData(i.toString(),
-                                                    datas2[i]['temp']),
-                                            ],
-                                          xValueMapper: (ChartData data, _) =>
-                                              data.x,
-                                          yValueMapper: (ChartData data, _) =>
-                                              data.y)
-                                      : filter == 'Last Week'
-                                          ? LineSeries<ChartData, String>(
-                                              dataSource: [
-                                                  // Bind data source
-                                                  for (int i = 0;
-                                                      i < datas3.length;
-                                                      i++)
-                                                    ChartData(i.toString(),
-                                                        datas3[i]['temp']),
-                                                ],
-                                              xValueMapper:
-                                                  (ChartData data, _) => data.x,
-                                              yValueMapper:
-                                                  (ChartData data, _) => data.y)
-                                          : LineSeries<ChartData, String>(
-                                              dataSource: [
-                                                  // Bind data source
-                                                  for (int i = 0;
-                                                      i < datas4.length;
-                                                      i++)
-                                                    ChartData(i.toString(),
-                                                        datas4[i]['temp']),
-                                                ],
-                                              xValueMapper:
-                                                  (ChartData data, _) => data.x,
-                                              yValueMapper:
-                                                  (ChartData data, _) => data.y)
-                        ]),
+              child: Card(
+                elevation: 3,
+                child: Container(
+                  height: 150,
+                  width: 300,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(5),
                   ),
+                  child: SfCartesianChart(
+                      zoomPanBehavior: ZoomPanBehavior(
+                          enableDoubleTapZooming: true,
+                          enableMouseWheelZooming: true,
+                          enablePanning: true,
+                          enablePinching: true,
+                          enableSelectionZooming: true),
+                      // Initialize category axis
+                      primaryXAxis: CategoryAxis(),
+                      series: <ChartSeries>[
+                        // Initialize line series
+                        filter == 'Today'
+                            ? LineSeries<ChartData, String>(
+                                dataSource: [
+                                    // Bind data source
+                                    for (int i = 0; i < datas1.length; i++)
+                                      ChartData(
+                                          i.toString(), datas1[i]['temp']),
+                                  ],
+                                xValueMapper: (ChartData data, _) => data.x,
+                                yValueMapper: (ChartData data, _) => data.y)
+                            : filter == 'Yesterday'
+                                ? LineSeries<ChartData, String>(
+                                    dataSource: [
+                                        // Bind data source
+                                        for (int i = 0; i < datas5.length; i++)
+                                          ChartData(
+                                              i.toString(), datas5[i]['temp']),
+                                      ],
+                                    xValueMapper: (ChartData data, _) => data.x,
+                                    yValueMapper: (ChartData data, _) => data.y)
+                                : filter == '2 Days Ago'
+                                    ? LineSeries<ChartData, String>(
+                                        dataSource: [
+                                            // Bind data source
+                                            for (int i = 0;
+                                                i < datas2.length;
+                                                i++)
+                                              ChartData(i.toString(),
+                                                  datas2[i]['temp']),
+                                          ],
+                                        xValueMapper: (ChartData data, _) =>
+                                            data.x,
+                                        yValueMapper: (ChartData data, _) =>
+                                            data.y)
+                                    : filter == 'Last Week'
+                                        ? LineSeries<ChartData, String>(
+                                            dataSource: [
+                                                // Bind data source
+                                                for (int i = 0;
+                                                    i < datas3.length;
+                                                    i++)
+                                                  ChartData(i.toString(),
+                                                      datas3[i]['temp']),
+                                              ],
+                                            xValueMapper: (ChartData data, _) =>
+                                                data.x,
+                                            yValueMapper: (ChartData data, _) =>
+                                                data.y)
+                                        : LineSeries<ChartData, String>(
+                                            dataSource: [
+                                                // Bind data source
+                                                for (int i = 0;
+                                                    i < datas4.length;
+                                                    i++)
+                                                  ChartData(i.toString(),
+                                                      datas4[i]['temp']),
+                                              ],
+                                            xValueMapper: (ChartData data, _) =>
+                                                data.x,
+                                            yValueMapper: (ChartData data, _) =>
+                                                data.y)
+                      ]),
                 ),
               ),
             ),
@@ -338,88 +337,87 @@ class _DataTabState extends State<DataTab> {
                 text: 'Dissolved Oxygen', fontSize: 18, color: Colors.white),
             Padding(
               padding: const EdgeInsets.only(top: 10, bottom: 10),
-              child: InteractiveViewer(
-                child: Card(
-                  elevation: 3,
-                  child: Container(
-                    height: 150,
-                    width: 300,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: SfCartesianChart(
-                        // Initialize category axis
-                        primaryXAxis: CategoryAxis(),
-                        series: <ChartSeries>[
-                          // Initialize line series
-                          filter == 'Today'
-                              ? LineSeries<ChartData, String>(
-                                  dataSource: [
-                                      // Bind data source
-                                      for (int i = 0; i < datas1.length; i++)
-                                        ChartData(
-                                            i.toString(), datas1[i]['DO']),
-                                    ],
-                                  xValueMapper: (ChartData data, _) => data.x,
-                                  yValueMapper: (ChartData data, _) => data.y)
-                              : filter == 'Yesterday'
-                                  ? LineSeries<ChartData, String>(
-                                      dataSource: [
-                                          // Bind data source
-                                          for (int i = 0;
-                                              i < datas5.length;
-                                              i++)
-                                            ChartData(
-                                                i.toString(), datas5[i]['DO']),
-                                        ],
-                                      xValueMapper: (ChartData data, _) =>
-                                          data.x,
-                                      yValueMapper: (ChartData data, _) =>
-                                          data.y)
-                                  : filter == '2 Days Ago'
-                                      ? LineSeries<ChartData, String>(
-                                          dataSource: [
-                                              // Bind data source
-                                              for (int i = 0;
-                                                  i < datas2.length;
-                                                  i++)
-                                                ChartData(i.toString(),
-                                                    datas2[i]['DO']),
-                                            ],
-                                          xValueMapper: (ChartData data, _) =>
-                                              data.x,
-                                          yValueMapper: (ChartData data, _) =>
-                                              data.y)
-                                      : filter == 'Last Week'
-                                          ? LineSeries<ChartData, String>(
-                                              dataSource: [
-                                                  // Bind data source
-                                                  for (int i = 0;
-                                                      i < datas3.length;
-                                                      i++)
-                                                    ChartData(i.toString(),
-                                                        datas3[i]['DO']),
-                                                ],
-                                              xValueMapper:
-                                                  (ChartData data, _) => data.x,
-                                              yValueMapper:
-                                                  (ChartData data, _) => data.y)
-                                          : LineSeries<ChartData, String>(
-                                              dataSource: [
-                                                  // Bind data source
-                                                  for (int i = 0;
-                                                      i < datas4.length;
-                                                      i++)
-                                                    ChartData(i.toString(),
-                                                        datas4[i]['DO']),
-                                                ],
-                                              xValueMapper:
-                                                  (ChartData data, _) => data.x,
-                                              yValueMapper:
-                                                  (ChartData data, _) => data.y)
-                        ]),
+              child: Card(
+                elevation: 3,
+                child: Container(
+                  height: 150,
+                  width: 300,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(5),
                   ),
+                  child: SfCartesianChart(
+                      zoomPanBehavior: ZoomPanBehavior(
+                          enableDoubleTapZooming: true,
+                          enableMouseWheelZooming: true,
+                          enablePanning: true,
+                          enablePinching: true,
+                          enableSelectionZooming: true),
+                      // Initialize category axis
+                      primaryXAxis: CategoryAxis(),
+                      series: <ChartSeries>[
+                        // Initialize line series
+                        filter == 'Today'
+                            ? LineSeries<ChartData, String>(
+                                dataSource: [
+                                    // Bind data source
+                                    for (int i = 0; i < datas1.length; i++)
+                                      ChartData(i.toString(), datas1[i]['DO']),
+                                  ],
+                                xValueMapper: (ChartData data, _) => data.x,
+                                yValueMapper: (ChartData data, _) => data.y)
+                            : filter == 'Yesterday'
+                                ? LineSeries<ChartData, String>(
+                                    dataSource: [
+                                        // Bind data source
+                                        for (int i = 0; i < datas5.length; i++)
+                                          ChartData(
+                                              i.toString(), datas5[i]['DO']),
+                                      ],
+                                    xValueMapper: (ChartData data, _) => data.x,
+                                    yValueMapper: (ChartData data, _) => data.y)
+                                : filter == '2 Days Ago'
+                                    ? LineSeries<ChartData, String>(
+                                        dataSource: [
+                                            // Bind data source
+                                            for (int i = 0;
+                                                i < datas2.length;
+                                                i++)
+                                              ChartData(i.toString(),
+                                                  datas2[i]['DO']),
+                                          ],
+                                        xValueMapper: (ChartData data, _) =>
+                                            data.x,
+                                        yValueMapper: (ChartData data, _) =>
+                                            data.y)
+                                    : filter == 'Last Week'
+                                        ? LineSeries<ChartData, String>(
+                                            dataSource: [
+                                                // Bind data source
+                                                for (int i = 0;
+                                                    i < datas3.length;
+                                                    i++)
+                                                  ChartData(i.toString(),
+                                                      datas3[i]['DO']),
+                                              ],
+                                            xValueMapper: (ChartData data, _) =>
+                                                data.x,
+                                            yValueMapper: (ChartData data, _) =>
+                                                data.y)
+                                        : LineSeries<ChartData, String>(
+                                            dataSource: [
+                                                // Bind data source
+                                                for (int i = 0;
+                                                    i < datas4.length;
+                                                    i++)
+                                                  ChartData(i.toString(),
+                                                      datas4[i]['DO']),
+                                              ],
+                                            xValueMapper: (ChartData data, _) =>
+                                                data.x,
+                                            yValueMapper: (ChartData data, _) =>
+                                                data.y)
+                      ]),
                 ),
               ),
             ),
