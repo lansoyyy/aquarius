@@ -60,14 +60,14 @@ class _OxygenTabState extends State<OxygenTab> {
                 sign: 'mg/L',
                 data: widget.data['DO'],
                 opium: widget.doms == 'Lato'
-                    ? '8.10 - 8.40'
+                    ? '4.33 - 5.25'
                     : widget.doms == 'Tilapia'
-                        ? '7.00 - 9.00'
+                        ? '> 3.00'
                         : widget.doms == 'Bangus'
-                            ? '7.50 - 8.30'
+                            ? '4.00 - 8.00'
                             : widget.doms == 'Pansat'
-                                ? '7.00 - 8.50'
-                                : '7.50 - 8.50',
+                                ? '4.00 - 7.00'
+                                : '> 5.00',
               ),
               const SizedBox(
                 height: 75,

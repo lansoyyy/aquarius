@@ -16,9 +16,6 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
-  DatabaseReference starCountRef =
-      FirebaseDatabase.instance.ref('users/+639639530422');
-
   late String date = '';
   late dynamic data1;
 
@@ -27,6 +24,10 @@ class _HomeTabState extends State<HomeTab> {
   @override
   void initState() {
     super.initState();
+    getData();
+  }
+
+  getData() {
     FirebaseDatabase.instance
         .ref('users/${widget.userData['phone']}')
         .onValue
@@ -48,163 +49,173 @@ class _HomeTabState extends State<HomeTab> {
   @override
   Widget build(BuildContext context) {
     return hasLoaded
-        ? SingleChildScrollView(
-            child: Container(
-              child: Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    TextBold(
-                        text: 'WELCOME', fontSize: 48, color: Colors.white),
-                    TextRegular(
-                        text: widget.userData['firstName'] +
-                                ' ' +
-                                widget.userData['lastName'] +
-                                '!' ??
-                            '',
-                        fontSize: 22,
-                        color: Colors.white),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                      child: GestureDetector(
-                        onTap: () async {
-                          // await FirebaseAuth.instance.signOut();
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => TempTab(
-                                    date: date,
-                                    data: data1,
-                                    doms: widget.userData['doms'],
-                                  )));
-                        },
-                        child: Card(
-                          elevation: 3,
-                          child: Container(
-                            width: 180,
-                            height: 150,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset('assets/images/temp.png',
-                                      height: 100),
-                                  const SizedBox(
-                                    height: 10,
+        ? RefreshIndicator(
+            onRefresh: () {
+              setState(() {
+                hasLoaded = false;
+              });
+              return getData();
+            },
+            child: Scaffold(
+              body: SingleChildScrollView(
+                child: Container(
+                  child: Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        TextBold(
+                            text: 'WELCOME', fontSize: 48, color: Colors.white),
+                        TextRegular(
+                            text: widget.userData['firstName'] +
+                                    ' ' +
+                                    widget.userData['lastName'] +
+                                    '!' ??
+                                '',
+                            fontSize: 22,
+                            color: Colors.white),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                          child: GestureDetector(
+                            onTap: () async {
+                              // await FirebaseAuth.instance.signOut();
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => TempTab(
+                                        date: date,
+                                        data: data1,
+                                        doms: widget.userData['doms'],
+                                      )));
+                            },
+                            child: Card(
+                              elevation: 3,
+                              child: Container(
+                                width: 180,
+                                height: 150,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset('assets/images/temp.png',
+                                          height: 100),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      TextRegular(
+                                        text: 'Temperature',
+                                        fontSize: 18,
+                                        color: secondary,
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                    ],
                                   ),
-                                  TextRegular(
-                                    text: 'Temperature',
-                                    fontSize: 18,
-                                    color: secondary,
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                ],
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => PhTab(
-                                    date: date,
-                                    data: data1,
-                                    doms: widget.userData['doms'],
-                                  )));
-                        },
-                        child: Card(
-                          elevation: 3,
-                          child: Container(
-                            width: 180,
-                            height: 150,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset('assets/images/ph-level.png',
-                                      height: 100),
-                                  const SizedBox(
-                                    height: 10,
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => PhTab(
+                                        date: date,
+                                        data: data1,
+                                        doms: widget.userData['doms'],
+                                      )));
+                            },
+                            child: Card(
+                              elevation: 3,
+                              child: Container(
+                                width: 180,
+                                height: 150,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset('assets/images/ph-level.png',
+                                          height: 100),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      TextRegular(
+                                        text: 'pH Level',
+                                        fontSize: 18,
+                                        color: secondary,
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                    ],
                                   ),
-                                  TextRegular(
-                                    text: 'pH Level',
-                                    fontSize: 18,
-                                    color: secondary,
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                ],
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => OxygenTab(
-                                    date: date,
-                                    data: data1,
-                                    doms: widget.userData['doms'],
-                                  )));
-                        },
-                        child: Card(
-                          elevation: 3,
-                          child: Container(
-                            width: 180,
-                            height: 150,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                      'assets/images/dissolved-oxygen.png',
-                                      height: 80),
-                                  const SizedBox(
-                                    height: 10,
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => OxygenTab(
+                                        date: date,
+                                        data: data1,
+                                        doms: widget.userData['doms'],
+                                      )));
+                            },
+                            child: Card(
+                              elevation: 3,
+                              child: Container(
+                                width: 180,
+                                height: 150,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                          'assets/images/dissolved-oxygen.png',
+                                          height: 80),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      TextRegular(
+                                        text: 'Dissolved\nOxygen',
+                                        fontSize: 18,
+                                        color: secondary,
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                    ],
                                   ),
-                                  TextRegular(
-                                    text: 'Dissolved\nOxygen',
-                                    fontSize: 18,
-                                    color: secondary,
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                ],
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),
