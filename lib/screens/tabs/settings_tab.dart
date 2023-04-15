@@ -13,7 +13,7 @@ class SettingsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String formattedNumber = userData['phone'].substring(0, 8) + "*******";
+    String formattedNumber = userData['phone'].substring(0, 8) + "*****";
 
     return Scaffold(
       appBar: AppBar(
