@@ -59,7 +59,7 @@ class _SignupScreenState extends State<SignupScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content:
-                TextRegular(text: 'Failed', fontSize: 14, color: Colors.white),
+                TextRegular(text: e.toString(), fontSize: 14, color: Colors.white),
           ),
         );
       },
