@@ -30,7 +30,6 @@ class _HomeTabState extends State<HomeTab> {
   getData() {
     String myId = widget.userData['phone'];
 
-    print(myId);
     FirebaseDatabase.instance
         .ref('users/${myId.replaceAll('@user.com', '')}')
         .onValue
