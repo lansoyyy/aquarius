@@ -140,25 +140,43 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: (() async {
                       // verifyPhone(phoneController.text);
 
-                      try {
-                        await FirebaseAuth.instance.signInWithEmailAndPassword(
-                            email: '${phoneController.text.trim()}@user.com',
-                            password: passwordController.text);
+                      if (box.read('phone') != phoneController.text &&
+                          box.read('password') != passwordController.text) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: TextRegular(
+                                text: 'Invalid Account!',
+                                fontSize: 14,
+                                color: Colors.white),
+                          ),
+                        );
+                      } else {
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
                             builder: (context) => const HomeScreen(),
                           ),
                         );
-                      } catch (e) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: TextRegular(
-                                text: e.toString(),
-                                fontSize: 14,
-                                color: Colors.white),
-                          ),
-                        );
                       }
+
+                      // try {
+                      //   await FirebaseAuth.instance.signInWithEmailAndPassword(
+                      //       email: '${phoneController.text.trim()}@user.com',
+                      //       password: passwordController.text);
+                      //   Navigator.of(context).pushReplacement(
+                      //     MaterialPageRoute(
+                      //       builder: (context) => const HomeScreen(),
+                      //     ),
+                      //   );
+                      // } catch (e) {
+                      //   ScaffoldMessenger.of(context).showSnackBar(
+                      //     SnackBar(
+                      //       content: TextRegular(
+                      //           text: e.toString(),
+                      //           fontSize: 14,
+                      //           color: Colors.white),
+                      //     ),
+                      //   );
+                      // }
                     }),
                     buttonColor: primary),
                 TextButton(
