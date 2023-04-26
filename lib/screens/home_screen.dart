@@ -25,7 +25,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(FirebaseAuth.instance.currentUser!.uid);
     final tabs = [
       StreamBuilder<DocumentSnapshot>(
           stream: userData,
