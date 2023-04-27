@@ -268,51 +268,51 @@ class _SignupScreenState extends State<SignupScreen> {
                                   ),
                                 );
                               } else {
-                                if (screenState == 0) {
-                                  if (phoneController.text.isEmpty) {
-                                  } else {
-                                    verifyPhone(phoneController.text);
-                                  }
-                                } else {
-                                  if (otpPin.length >= 6) {
-                                    verifyOTP();
-                                  }
-                                }
-                                // try {
-                                //   await FirebaseAuth.instance
-                                //       .createUserWithEmailAndPassword(
-                                //           email:
-                                //               '${phoneController.text.trim()}@user.com',
-                                //           password: passwordController.text);
-                                //   addUser(
-                                //       firstNameController.text,
-                                //       lastNameController.text,
-                                //       phoneController.text,
-                                //       pondSizeController.text,
-                                //       org);
-                                //   ScaffoldMessenger.of(context).showSnackBar(
-                                //     SnackBar(
-                                //       content: TextRegular(
-                                //           text: 'Account created succesfully!',
-                                //           fontSize: 14,
-                                //           color: Colors.white),
-                                //     ),
-                                //   );
-                                //   Navigator.of(context).pushReplacement(
-                                //     MaterialPageRoute(
-                                //       builder: (context) => const LoginScreen(),
-                                //     ),
-                                //   );
-                                // } catch (e) {
-                                //   ScaffoldMessenger.of(context).showSnackBar(
-                                //     SnackBar(
-                                //       content: TextRegular(
-                                //           text: e.toString(),
-                                //           fontSize: 14,
-                                //           color: Colors.white),
-                                //     ),
-                                //   );
+                                // if (screenState == 0) {
+                                //   if (phoneController.text.isEmpty) {
+                                //   } else {
+                                //     verifyPhone(phoneController.text);
+                                //   }
+                                // } else {
+                                //   if (otpPin.length >= 6) {
+                                //     verifyOTP();
+                                //   }
                                 // }
+                                try {
+                                  await FirebaseAuth.instance
+                                      .createUserWithEmailAndPassword(
+                                          email:
+                                              '${phoneController.text.trim()}@user.com',
+                                          password: passwordController.text);
+                                  addUser(
+                                      firstNameController.text,
+                                      lastNameController.text,
+                                      phoneController.text,
+                                      pondSizeController.text,
+                                      org);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: TextRegular(
+                                          text: 'Account created succesfully!',
+                                          fontSize: 14,
+                                          color: Colors.white),
+                                    ),
+                                  );
+                                  Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                      builder: (context) => const LoginScreen(),
+                                    ),
+                                  );
+                                } catch (e) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: TextRegular(
+                                          text: e.toString(),
+                                          fontSize: 14,
+                                          color: Colors.white),
+                                    ),
+                                  );
+                                }
                               }
                             }),
                             buttonColor: primary),
