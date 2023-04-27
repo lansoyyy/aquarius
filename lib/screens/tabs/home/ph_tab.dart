@@ -114,8 +114,10 @@ class _PhTabState extends State<PhTab> {
                   child: ListTile(
                     title: TextBold(
                         text: 'Aerator:', fontSize: 18, color: Colors.grey),
-                    trailing:
-                        TextBold(text: 'Off', fontSize: 16, color: Colors.grey),
+                    trailing: TextBold(
+                        text: widget.data['Aerator Status'] == 0 ? 'Off' : 'On',
+                        fontSize: 16,
+                        color: Colors.grey),
                   ),
                 ),
               ),
