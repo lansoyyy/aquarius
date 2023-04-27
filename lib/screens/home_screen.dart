@@ -3,6 +3,7 @@ import 'package:aquarius/screens/tabs/home_tab.dart';
 import 'package:aquarius/screens/tabs/settings_tab.dart';
 import 'package:aquarius/utils/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final Stream<DocumentSnapshot> userData = FirebaseFirestore.instance
       .collection('User')
-      .doc('xlNx1QAao9bVdJXFjjQmCjbu6Wd2')
+      .doc(FirebaseAuth.instance.currentUser!.uid)
       .snapshots();
 
   @override

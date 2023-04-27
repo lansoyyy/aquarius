@@ -30,25 +30,34 @@ class _HomeTabState extends State<HomeTab> {
   getData() async {
     String myId = widget.userData['phone'];
 
-    final ref = FirebaseDatabase.instance.ref();
-    final snapshot1 =
-        await ref.child('users/${myId.replaceAll('@user.com', '')}').get();
-
-    print(snapshot1.value.runtimeType);
-
     FirebaseDatabase.instance
         .ref('users/${myId.replaceAll('@user.com', '')}')
         .onValue
         .listen((DatabaseEvent event) async {
       final dynamic data = event.snapshot.value;
+      int closestTimestampDiff = -1;
+      String closestTimestamp = '';
 
-      var firstKey = data.values.elementAt(0);
-      var firstValue = data.values.elementAt(0);
+      for (var timestamp in data.keys) {
+        int timestampDiff = DateTime.now()
+            .difference(
+                DateTime.fromMillisecondsSinceEpoch(int.parse(timestamp)))
+            .inMilliseconds
+            .abs();
+        if (closestTimestampDiff == -1 ||
+            timestampDiff < closestTimestampDiff) {
+          closestTimestampDiff = timestampDiff;
+          closestTimestamp = timestamp;
+        }
+      }
+
+      var closestValue = data[closestTimestamp];
+
+      await Future.delayed(const Duration(seconds: 2));
 
       setState(() {
-        date = firstKey.toString();
-        data1 = firstValue.toString();
-
+        date = closestTimestamp;
+        data1 = closestValue;
         hasLoaded = true;
       });
     });
