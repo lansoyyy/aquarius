@@ -296,7 +296,7 @@ class _DataTabState extends State<DataTab> {
                                                 i < datas2.length;
                                                 i++)
                                               ChartData(i.toString(),
-                                                  datas2[i]['temp']),
+                                                  datas3[i]['temp']),
                                           ],
                                         xValueMapper: (ChartData data, _) =>
                                             data.x,
