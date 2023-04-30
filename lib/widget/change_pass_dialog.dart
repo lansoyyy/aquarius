@@ -1,5 +1,6 @@
 import 'package:aquarius/utils/colors.dart';
 import 'package:aquarius/widget/text_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -40,6 +41,7 @@ class _ChangePasswordDialogState extends State<ChangePasswordDialog> {
       actions: [
         TextButton(
             onPressed: () {
+              _changePassword(_phoneController.text);
               box.write('password', _phoneController.text);
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Password Updated!')),
@@ -49,5 +51,23 @@ class _ChangePasswordDialogState extends State<ChangePasswordDialog> {
             child: TextBold(text: 'Update', fontSize: 18, color: primary)),
       ],
     );
+  }
+
+  void _changePassword(String newPassword) async {
+    final user = FirebaseAuth.instance.currentUser;
+    final cred = EmailAuthProvider.credential(
+        email: user!.email!, password: box.read('password'));
+
+    user.reauthenticateWithCredential(cred).then((value) {
+      user.updatePassword(newPassword).then((_) {
+        //Success, do something
+        print('password changed');
+      }).catchError((error) {
+        //Error, show something
+        print('invalid');
+      });
+    }).catchError((err) {
+      print('invalid');
+    });
   }
 }
