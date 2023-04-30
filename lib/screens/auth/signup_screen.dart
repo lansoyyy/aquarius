@@ -298,6 +298,9 @@ class _SignupScreenState extends State<SignupScreen> {
                                           color: Colors.white),
                                     ),
                                   );
+                                  box.write('phone', phoneController.text);
+                                  box.write(
+                                      'password', passwordController.text);
                                   Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
                                       builder: (context) => const LoginScreen(),
